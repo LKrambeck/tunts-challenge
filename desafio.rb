@@ -2,13 +2,17 @@ class Student
 
     attr_accessor :registry, :missedClasses, :grade1, :grade2, :grade3, :gradeAverage, :situation, :examGrade
 
+    def getStudent (row)
+        @registry = row[0].to_i
+        @missedClasses = row[2].to_i
+        @grade1 = row[3].to_i
+        @grade2 = row[4].to_i
+        @grade3 = row[5].to_i
+    end
+
 end
 
 class GradesProcessor
-
-    def exist? (student)
-        student.registry != nil && student.registry != ""
-    end
 
     def attendance? (student)
         student.missedClasses <= 15
@@ -27,11 +31,18 @@ end
 student = Student.new
 processor = GradesProcessor.new
 
-student.registry = 8
-student.missedClasses = 10
-student.grade1 = 53
-student.grade2 = 96
-student.grade3 = 89 
+require 'csv'
+table = CSV.read("teste.csv")
+
+# 0 = registry
+# 2 = missedClasses
+# 3 = grade1
+# 4 = grade2
+# 5 = grade3 
+# 6 = situation
+# 7 = examGrade
+
+student.getStudent (table[0])
 
 if processor.attendance?(student)
 
@@ -57,4 +68,4 @@ else
 
 end
 
-puts "#{student.registry}:#{student.missedClasses}:#{student.grade1}:#{student.grade2}:#{student.grade3}:#{student.gradeAverage}:#{student.situation}:#{student.examGrade}"
+puts "#{student.registry},#{student.missedClasses},#{student.grade1},#{student.grade2},#{student.grade3},#{student.gradeAverage},#{student.situation},#{student.examGrade}"
