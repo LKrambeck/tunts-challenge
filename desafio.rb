@@ -20,9 +20,8 @@ end
 
 student = Student.new
 
-#interação com csv/google docs
 registry = 1
-missedClasses = 8
+missedClasses = 16
 grade1 = 35
 grade2 = 63
 grade3 = 61
@@ -43,7 +42,14 @@ if student.attendance?(missedClasses)
         situation = "Exame Final"
         examGrade = student.necessaryGrade(grade)
     end
+
+else
+
+    situation = "Reprovado por Falta"
+    examGrade = 0
+
 end
+
 
 puts "#{registry}:#{missedClasses}:#{grade1}:#{grade2}:#{grade3}:#{situation}:#{examGrade}"
 
