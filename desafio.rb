@@ -1,62 +1,60 @@
 class Student
 
-    def exist? (registry)
-        registry != nil && registry != ""
+    attr_accessor :registry, :missedClasses, :grade1, :grade2, :grade3, :gradeAverage, :situation, :examGrade
+
+end
+
+class GradesProcessor
+
+    def exist? (student)
+        student.registry != nil && student.registry != ""
     end
 
-    def attendance? (missedClasses)
-        missedClasses <= 15
+    def attendance? (student)
+        student.missedClasses <= 15
     end
 
-    def grade (grade1, grade2, grade3)
-        (p1+p2+p3) / 3
+    def gradeAverage (student)
+        student.gradeAverage = (student.grade1 + student.grade2 + student.grade3) / 3
     end
 
-    def necessaryGrade (grade)
-        100-grade
+    def necessaryGrade (student)
+        student.examGrade = 100 - student.gradeAverage
     end
 
 end
 
 student = Student.new
+processor = GradesProcessor.new
 
-registry = 1
-missedClasses = 16
-grade1 = 35
-grade2 = 63
-grade3 = 61
+student.registry = 8
+student.missedClasses = 10
+student.grade1 = 53
+student.grade2 = 96
+student.grade3 = 89 
 
-if student.attendance?(missedClasses)
+if processor.attendance?(student)
 
-    grade = student.grade(grade1,grade2,grade3)
+    processor.gradeAverage(student)
 
-    if grade >= 70
-        situation = "Aprovado"
-        examGrade = 0
+    if student.gradeAverage >= 70
+        student.situation = "Aprovado"
+        student.examGrade = 0
 
-    elsif grade < 50
-        situation = "Reprovado"
-        examGrade = 0
+    elsif student.gradeAverage < 50
+        student.situation = "Reprovado"
+        student.examGrade = 0
         
     else
-        situation = "Exame Final"
-        examGrade = student.necessaryGrade(grade)
+        student.situation = "Exame Final"
+        student.examGrade = processor.necessaryGrade(student)
     end
 
 else
 
-    situation = "Reprovado por Falta"
-    examGrade = 0
+    student.situation = "Reprovado por Falta"
+    student.examGrade = 0
 
 end
 
-
-puts "#{registry}:#{missedClasses}:#{grade1}:#{grade2}:#{grade3}:#{situation}:#{examGrade}"
-
-
-
-
-
-
-
-
+puts "#{student.registry}:#{student.missedClasses}:#{student.grade1}:#{student.grade2}:#{student.grade3}:#{student.gradeAverage}:#{student.situation}:#{student.examGrade}"
