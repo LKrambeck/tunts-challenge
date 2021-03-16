@@ -27,7 +27,7 @@ I divided the project in two main archives (g_cloud_service.rb and challenge.rb)
 - Student: stores the student data and a method to build it.
 - GradesProcessor: calculates the student's grades, attendance, etc.
 
-and the execute method within to run everything in the correct order.
+and the execute method to run everything in the correct order.
 
 
 
