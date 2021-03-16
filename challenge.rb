@@ -9,7 +9,6 @@ class Student
         @grade1 = row[3].to_i
         @grade2 = row[4].to_i
         @grade3 = row[5].to_i
-        puts "Student: #{row[1]}"
     end
 end
 
@@ -48,7 +47,8 @@ class GradesProcessor
     end
 end
 
-def print_logs (student)
+def print_logs (row, student)
+    puts "Student: #{row[1]}"
     puts "Attendance: #{60-student.missedClasses}/60 (#{(60-student.missedClasses)*100/60}%)"
     puts "Grade1: #{student.grade1}, Grade2: #{student.grade2}, Grade3: #{student.grade3}"
     puts "Average grade: #{student.grade_average}"
@@ -75,7 +75,7 @@ def execute
       range_name = "engenharia_de_software!G#{4+index}:H"
       student.build_student(row)
       grades_processor.calculate_grades(student)
-      print_logs (student)
+      print_logs(row, student)
       cloud_service.write_spreadsheet(student,range_name, spreadsheet_id)
     end
 end
