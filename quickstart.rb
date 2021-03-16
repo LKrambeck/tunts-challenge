@@ -11,7 +11,7 @@ CREDENTIALS_PATH = "credentials.json".freeze
 # created automatically when the authorization flow completes for the first
 # time.
 TOKEN_PATH = "token.yaml".freeze
-SCOPE = Google::Apis::SheetsV4::AUTH_SPREADSHEETS_READONLY
+SCOPE = Google::Apis::SheetsV4::AUTH_SPREADSHEETS
 
 ##
 # Ensure valid credentials, either by restoring from the saved credentials
@@ -48,9 +48,33 @@ spreadsheet_id = "1a2n_Ej9-xJUOfWTY-Z8sU_RP2v5EP03K71Yj-cdo4q8"
 range = "engenharia_de_software!A4:H"
 response = service.get_spreadsheet_values spreadsheet_id, range
 puts "No data found." if response.values.empty?
+
 student = Student.new
 processor = GradesProcessor.new
-response.values.each do |col|
-  student.buildStudent(col)
+values = []
+
+response.values.each_with_index do |row,index|
+  range_name = "engenharia_de_software!G#{4+index}:H"
+  student.buildStudent(row)
   processor.run(student)
+  #writeOutput (student, range_name)
+  values = [
+    [
+      student.situation, 
+      student.examGrade
+    ]
+  ]
+
+  data = [
+  {
+    range:  range_name,
+    values: values
+  }]
+
+  value_range_object = Google::Apis::SheetsV4::ValueRange.new(range:  range_name,
+                                                              values: values)
+  result = service.update_spreadsheet_value(spreadsheet_id,
+                                            range_name,
+                                            value_range_object,
+                                            value_input_option: "USER_ENTERED")
 end
