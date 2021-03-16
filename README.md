@@ -15,7 +15,7 @@ Open the [public spreadsheet](https://docs.google.com/spreadsheets/d/1a2n_Ej9-xJ
 
 # Documentation
 
-I divided the project in two main archives (g_cloud_service.rb and challenge.rb). The first one containing the necessary methods to have acess to the Google Docs API and the latter the classes and methods to calculate the students data and run the API methods.
+I divided the project in two main archives (g_cloud_service.rb and challenge.rb). The first one containing the necessary methods to have acess to the Google Docs API and the latter contains the classes and methods to calculate the students data and run the API methods.
 
 **g_cloud_service.rb** contains the following methods all within GCloudService class:
 - init (initialize)
