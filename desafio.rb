@@ -1,7 +1,6 @@
 require "./g_cloud_service.rb"
 
 class Student
-
     attr_accessor :registry, :missedClasses, :grade1, :grade2, :grade3, :grade_average, :situation, :examGrade
 
     def build_student (row)
@@ -11,11 +10,9 @@ class Student
         @grade2 = row[4].to_i
         @grade3 = row[5].to_i
     end
-
 end
 
 class GradesProcessor
-
     def calculate_grades (student)
         if has_minimum_attendance?(student)
             grade_average(student)
@@ -48,7 +45,6 @@ class GradesProcessor
     def necessary_grade (student)
         student.examGrade = 100 - student.grade_average
     end
-
 end
 
 def execute
