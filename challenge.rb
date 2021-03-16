@@ -14,9 +14,9 @@ end
 
 class GradesProcessor
     def calculate_grades (student)
-        if has_minimum_attendance?(student)
-            grade_average(student)
-        
+        grade_average_processor(student)
+
+        if has_minimum_attendance?(student)       
             if student.grade_average >= 70
                 student.situation = "Aprovado"
                 student.examGrade = 0
@@ -38,8 +38,8 @@ class GradesProcessor
         student.missedClasses <= 15
     end
 
-    def grade_average (student)
-        student.grade_average = (student.grade1 + student.grade2 + student.grade3) / 3
+    def grade_average_processor (student)
+        student.grade_average = ((student.grade1 + student.grade2 + student.grade3).to_f/3).ceil
     end
 
     def necessary_grade (student)
