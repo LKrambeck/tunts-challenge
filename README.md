@@ -2,6 +2,8 @@
 
 This challenge gives you a Google Docs spreadsheet containing a table of students and it's name, classes attendance, grades, etc. It is asked to develop a program that get the data from the API, calculates the student averages and write on the spreadsheet their situation.
 
+More in-depth info can be found on 'TuntsCorp Challenge.pdf'
+
 # Getting Started
 
 Run in your terminal the following steps:
